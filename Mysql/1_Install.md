@@ -18,7 +18,7 @@ tar -xzvf ～/Download/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz
 
 移动并修改
 
-```
+```shell
 mv ~/Download/mysql-5.7.17-linux-glibc2.5-x86_64   /usr/local/mysql
 ```
 
@@ -30,7 +30,7 @@ mkdir /usr/local/mysql/data
 
 安装依赖
 
-```
+```shell
 sudo pacman -S numactl
 sudo pacman -S ncurses5-compat-libs
 ```
@@ -56,7 +56,7 @@ sudo chmod 644 my.cnf
 >其中skip-grant-tables这个选项可以跳过默认密码。
 >初始化的时候不会创建一个临时密码。登录的时候直接回车登录。
 
-```
+```shell
 [client]
 default-character-set=utf8
 port = 3306
@@ -92,7 +92,7 @@ skip-grant-tables
 
 切换到`/var/log/`创建日志文件`mysqld.log`并设置读写权限 。
 
-```
+```shell
 cd /var/log
 touch mysqld.log
 chmod 777 mysqld.log
@@ -100,10 +100,22 @@ chmod 777 mysqld.log
 
 切换到`mysql`目录下初始化数据库。
 
-```
+```shell
 cd /usr/local/mysql
 sudo bin/mysqld --initialize --user=mysql
 ```
+
+
+
+补充
+
+```shell
+# 报错 The server quit without updating PID
+sudo mkdir -p /var/run/mysqld
+sudo chown -R mysql /var/run/mysqld
+```
+
+
 
 启动`mysql`
 
